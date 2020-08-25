@@ -91,6 +91,8 @@ public:
 	    delete it;
 	}
     }
+
+    // @TODO: Implement Iterators
     
 private:
     friend string build_string(const string_builder& sb);
@@ -118,8 +120,8 @@ private:
 	    : _string(std::move(str)), next(nullptr) {}
     };
 
-    size_t total_length     = 0;         // This doesn't include null character
-    substring* first, *last = nullptr;
+    size_t total_length;         // This doesn't include null character
+    substring* first, *last;
 };
 
 // Returns a string made from the substrings in the given string builder

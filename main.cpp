@@ -58,7 +58,6 @@ void print_array(const darray<vec3>& arr) {
 }
 
 int main() {
-    string_builder sb;
-    sb.append(" World!").prepend("Hello");
-    std::cout << build_string(sb) << std::endl;
+    darray<int> arr = { 1, 2, 3 };
+    std::cout << arr[-5] << std::endl;
 }

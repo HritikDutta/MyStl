@@ -15,7 +15,7 @@ public:
     inline const T* data() const { return buffer; }
     inline T* data() { return buffer; }
 
-    // C-tor
+    // C-tors
     sarray() {}
 
     // This C-tor allows us to use an initializer list as an input
@@ -48,12 +48,12 @@ public:
 
     // [] operator to get element at given index
     const T& operator[](size_t index) const {
-	assert(index < _size);
+	assert(index >= 0 && index < _size);
 	return buffer[index];
     }
 
     T& operator[](size_t index) {
-	assert(index < _size);
+	assert(index >= 0 && index < _size);
 	return buffer[index];
     }
     
@@ -97,7 +97,6 @@ public:
     }
 
     T& push_back(T&& value) {
-	// If the vector has filled up, resize it
 	if (_size >= _capacity) {
 	    size_t cap = 2;
 	    if (_capacity != 0) cap = _capacity * growth_rate;
@@ -128,7 +127,7 @@ public:
     void pop_back() {
 	if (_size > 0) {
 	    _size--;
-	    buffer[_size].~T();    // Call D-tor of element
+	    buffer[_size].~T();    // Call D-tor of element explicitly
 	}
     }
 
@@ -194,12 +193,12 @@ public:
 
     // [] operator to get element at given index
     const T& operator[](size_t index) const {
-	assert(index < _size);
+	assert(index >= 0 && index < _size);
 	return buffer[index];
     }
 
     T& operator[](size_t index) {
-	assert(index < _size);
+	assert(index >= 0 && index < _size);
 	return buffer[index];
     }
 
@@ -258,7 +257,7 @@ private:
     // Can be used with std::cout
     friend std::ostream& operator<<(std::ostream& stream, const darray& da) {
 	stream << "darray <" << type_name<T>() << "> { size: " << da._size
-	       << ", capacity: " << da._capacity << "}";
+	       << ", capacity: " << da._capacity << " }";
 	return stream;
     }
     
